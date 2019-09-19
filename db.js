@@ -40,6 +40,11 @@ const Offering = conn.define('offering', {
   }
 });
 
+Offering.belongsTo(Product);
+Product.hasMany(Offering, { foreignKey: 'productId' });
+Offering.belongsTo(Company);
+Company.hasMany(Offering, { foreignKey: 'companyId' });
+
 const syncAndSeed = async()=> {
   await conn.sync({ force: true});
   const products = [
@@ -59,6 +64,11 @@ const syncAndSeed = async()=> {
   const [ offering1, offering2 ] = await Promise.all(offerings.map( offering => Offering.create(offering)));
 }
 
-syncAndSeed()
-  .then(()=> console.log('success'))
-  .catch(ex => console.log('ex'));
+module.exports = {
+  syncAndSeed,
+  models: {
+    Product,
+    Company,
+    Offering
+  }
+}
