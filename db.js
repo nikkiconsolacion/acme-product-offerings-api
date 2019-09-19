@@ -61,7 +61,7 @@ const syncAndSeed = async()=> {
     { price: 1.1, companyId: Fiji.id, productId: water.id },
     { price: 2.4, companyId: CocaCola.id, productId: soda.id }
   ];
-  const [ offering1, offering2 ] = await Promise.all(offerings.map( offering => Offering.create(offering)));
+  await Promise.all(offerings.map( offering => Offering.create(offering)));
 }
 
 module.exports = {
