@@ -59,4 +59,6 @@ const syncAndSeed = async()=> {
   const [ offering1, offering2 ] = await Promise.all(offerings.map( offering => Offering.create(offering)));
 }
 
-syncAndSeed();
+syncAndSeed()
+  .then(()=> console.log('success'))
+  .catch(ex => console.log('ex'));
